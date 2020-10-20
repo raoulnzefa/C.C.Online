@@ -270,18 +270,7 @@
             check: true,
         },
         created() {
-            //判断登录状态
-            ly.verify().then(res => {
-                //已登录
-                ly.http.get("/cart").then(({data}) => {
-                    this.carts = data;
-                    this.selected = this.carts;
-                });
-            }).catch(() => {
-                //未登录购物车的查询
-                this.carts = ly.store.get("LY_CART");
-                this.selected = this.carts;
-            });
+           this.loadCarts();
         },
         watch: {
             check(newVal) {
@@ -301,6 +290,30 @@
             },
         },
         methods: {
+            loadCarts() {
+                //判断登录状态
+                ly.verify().then(res => {
+                    //已登录
+                    //检查localStorage中是否有数据
+                    const temps = ly.store.get("LY_CART");
+                    if (temps !== null) {
+                        //有数据，与redis合并
+                        temps.forEach(temp => {
+                            ly.http.post("/cart", {skuId: temp.skuId, num: temp.num}).then();
+                        });
+                        //合并后。删除本地数据
+                        ly.store.del("LY_CART");
+                    }
+                    ly.http.get("/cart").then(({data}) => {
+                        this.carts = data;
+                        this.selected = this.carts;
+                    });
+                }).catch(() => {
+                    //未登录购物车的查询
+                    this.carts = ly.store.get("LY_CART");
+                    this.selected = this.carts;
+                });
+            },
             toOrder() {
                 //先判断登录状态
                 ly.verify().then(res => {
@@ -337,7 +350,7 @@
             deleteCart(index) {
                 ly.verify().then(res => {
                     //已登录，向后台发起请求
-                    ly.http.delete("/cart" + this.carts[index].skuId).then(()=>{
+                    ly.http.delete("/cart/" + this.carts[index].skuId).then(()=>{
                         /*后台成功响应后，要把页面的购物车中数据也删除*/
                         this.carts.splice(index, 1);
                     })
