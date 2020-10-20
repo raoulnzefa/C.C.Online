@@ -337,6 +337,10 @@
             deleteCart(index) {
                 ly.verify().then(res => {
                     //已登录，向后台发起请求
+                    ly.http.delete("/cart" + this.carts[index].skuId).then(()=>{
+                        /*后台成功响应后，要把页面的购物车中数据也删除*/
+                        this.carts.splice(index, 1);
+                    })
                 }).catch(() => {
                     //未登录 购物车查询
                     this.carts.splice(index, 1); //javascript从数组中删除一个对象

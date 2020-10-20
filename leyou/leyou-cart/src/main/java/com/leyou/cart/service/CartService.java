@@ -89,4 +89,12 @@ public class CartService {
         cart.setNum(num);
         hashOperations.put(cart.getSkuId().toString(), JsonUtils.serialize(cart));
     }
+
+    public void deleteCart(String skuId) {
+        //获取登录用户
+        UserInfo userInfo = LoginInterceptor.getUserInfo();
+        String key = KEY_PREFIX + userInfo.getId();
+        BoundHashOperations<String, Object, Object> hashOps = this.redisTemplate.boundHashOps(key);
+        hashOps.delete(skuId);
+    }
 }
