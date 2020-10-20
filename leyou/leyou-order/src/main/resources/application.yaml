@@ -51,7 +51,7 @@ mapper:
   identity: mysql
 leyou:
   worker:
-    workerId: 1
+    workerId: 1 #为了保证不重复，我们给每个部署的节点都配置机器id
     datacenterId: 1
   jwt:
     pubKeyPath: F:\\ideawork\\leyoumall\\tmp\\rsa.pub # 公钥地址

@@ -8,8 +8,8 @@ const shortcut = {
                Estimad@，<span style='color: cadetblue; font-weight: bold'>{{user.username}}</span>\
                </li>\
                <li v-else class='f-item'> \
-                   <a href='javascript:void(0)' @click='gotoLogin'>Iniciar Sesión</a>　 \
-                   <span><a href='register.html' target='_blank' style='color: slateblue'>Regístrate</a></span> \
+                   <a  @click='gotoLogin'>Iniciar Sesión</a>　 \
+                   <span><a @click='gotoRegister' target='_blank' style='color: slateblue'>Regístrate</a></span> \
                </li> \
            </ul> \
            <ul class='fr'> \
@@ -52,7 +52,10 @@ const shortcut = {
     },
     methods: {
         gotoLogin() {
-            window.location = "login.html?returnUrl=" + window.location;
+            window.location = "http://www.leyou.com/login.html?returnUrl=" + window.location;
+        },
+        gotoRegister() {
+            window.location = "http://www.leyou.com/register.html";
         }
     }
 }

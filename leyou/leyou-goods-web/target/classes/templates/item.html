@@ -668,7 +668,7 @@
             addCart() {
                 //判断是否登录
                 ly.verify().then(res => {
-                    //登录
+                    //已登录发送消息到后台，保存到redis中
                     ly.http.post("/cart", {skuId: this.sku.id, num: this.num}).then(res => {
                         window.location = "http://www.leyou.com/cart.html";
                     })
@@ -676,7 +676,7 @@
                     //未登录，保存到localStorage
                     //1. 查询购物车信息
                     let carts = ly.store.get("LY_CART") || [];
-                    let cart = carts.find(cart => cart.skuId == this.sku.id);
+                    let cart = carts.find(cart => cart.skuId === this.sku.id);
                     if (cart) {
                         //2. 如果购物车中有该商品记录，更新数量
                         cart.num += this.num;
@@ -691,9 +691,11 @@
                             num: this.num,
                         })
                     }
+                    //把carts写回localstorage
                     ly.store.set("LY_CART", carts);
-                    window.location = "http://www.leyou.com/cart.html";
-                })
+                    //跳转
+                    window.location= "http://www.leyou.com/cart.html";
+                });
             },
             incr() {
                 this.num++;

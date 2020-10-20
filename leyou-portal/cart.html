@@ -23,7 +23,7 @@
 
         <!--logoArea-->
         <div class="logoArea">
-            <div class="fl logo"><span class="title">Mi cesta</span></div>
+            <div class="fl logo" @click="gotoIndex"><span class="title">Mi cesta</span></div>
         </div>
 
         <!--All goods-->
@@ -359,6 +359,9 @@
                     this.carts.splice(index, 1); //javascript从数组中删除一个对象
                     ly.store.set("LY_CART", this.carts);
                 });
+            },
+            gotoIndex(){
+                window.location = "http://www.leyou.com/index.html";
             },
         },
         components: {
