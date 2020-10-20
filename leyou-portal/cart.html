@@ -30,8 +30,8 @@
         <div class="allgoods">
             <h4>En total: <span>{{total}}</span></h4>
             <div class="cart-main">
-                <div class="yui3-g cart-th">
-                    <div class="yui3-u-1-4"><input type="checkbox" v-model="check"/> Todo</div>
+                <div class="yui3-g cart-th" style="background-color: cadetblue; color: white; font-size: large" >
+                    <div class="yui3-u-1-4"><input type="checkbox" v-model="check"/>Todo</div>
                     <div class="yui3-u-1-4">Artículo</div>
                     <div class="yui3-u-1-8">Precio ￥</div>
                     <div class="yui3-u-1-8">Cantidad</div>
@@ -61,7 +61,7 @@
                                 <li class="yui3-u-1-8"><span style="line-height:70px " class="price">{{ly.formatPrice(cart.price)}}</span></li>
                                 <li class="yui3-u-1-8" style="padding-top: 20px">
                                     <a href="javascript:void(0)" class="increment mins" @click="decr(cart)">-</a>
-                                    <input autocomplete="off" type="text" v-model="cart.num" value="1" minnum="1" class="itxt" />
+                                    <input autocomplete="off" type="text" v-model="cart.num" value="1" min="1" class="itxt" />
                                     <a href="javascript:void(0)" class="increment plus" @click="incr(cart)">+</a>
                                 </li>
                                 <li class="yui3-u-1-8"><span style="line-height:70px " class="sum">{{ly.formatPrice(cart.price * cart.num)}}</span></li>
@@ -266,11 +266,13 @@
         data: {
             ly,
             carts: [], //购物车数据
-            selected: [],
+            selected: [],//记录选中的商品
             check: true,
         },
         created() {
+            //判断登录状态
             ly.verify().then(res => {
+                //已登录
                 ly.http.get("/cart").then(({data}) => {
                     this.carts = data;
                     this.selected = this.carts;
@@ -315,26 +317,28 @@
                     cart.num --;
                 }
                 ly.verify().then(res => {
+                    //已登录，向后台发起请求
                     ly.http.put("/cart", {skuId: cart.skuId, num: cart.num});
                 }).catch(() => {
-                    //未登录购物车查询
+                    //未登录，直接操作本地数据
                     ly.store.set("LY_CART", this.carts);
                 });
             },
             incr(cart) {
                 cart.num ++;
                 ly.verify().then(res => {
+                    //已登录，向后台发起请求
                     ly.http.put("/cart", {skuId: cart.skuId, num: cart.num});
                 }).catch(() => {
-                    //未登录购物车查询
+                    //未登录，直接操作本地数据
                     ly.store.set("LY_CART", this.carts);
                 });
             },
             deleteCart(index) {
                 ly.verify().then(res => {
-
+                    //已登录，向后台发起请求
                 }).catch(() => {
-                    //未登录购物车查询
+                    //未登录 购物车查询
                     this.carts.splice(index, 1); //javascript从数组中删除一个对象
                     ly.store.set("LY_CART", this.carts);
                 });

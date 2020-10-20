@@ -4,8 +4,10 @@ import com.leyou.cart.config.JwtProperties;
 import com.leyou.common.pojo.UserInfo;
 import com.leyou.common.utils.CookieUtils;
 import com.leyou.common.utils.JwtUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -28,6 +30,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter { //implements H
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获取cookie中的token
         String token = CookieUtils.getCookieValue(request, this.jwtProperties.getCookieName());
+        if(StringUtils.isBlank(token)) {
+            //未登录，返回401
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            return false;
+        }
         //解析token,获取用户信息
         UserInfo userInfo = JwtUtils.getInfoFromToken(token, this.jwtProperties.getPublicKey());
         if (userInfo == null) {
