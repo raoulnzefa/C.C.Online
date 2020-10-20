@@ -38,7 +38,7 @@ public class CartController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("{skuId}")
+    @DeleteMapping("/{skuId}")
     public ResponseEntity<Void> deleteCart (@PathVariable("skuId") String skuId) {
         this.cartService.deleteCart(skuId);
         return ResponseEntity.ok().build();

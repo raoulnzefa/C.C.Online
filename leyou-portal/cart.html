@@ -294,7 +294,7 @@
                 //判断登录状态
                 ly.verify().then(res => {
                     //已登录
-                    //检查localStorage中是否有数据
+                    /*//检查localStorage中是否有数据(转到登录页面，登录方法中)
                     const temps = ly.store.get("LY_CART");
                     if (temps !== null) {
                         //有数据，与redis合并
@@ -303,7 +303,7 @@
                         });
                         //合并后。删除本地数据
                         ly.store.del("LY_CART");
-                    }
+                    }*/
                     ly.http.get("/cart").then(({data}) => {
                         this.carts = data;
                         this.selected = this.carts;

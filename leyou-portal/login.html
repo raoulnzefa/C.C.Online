@@ -109,6 +109,17 @@
         },
         methods:{
             login(){
+                //已登录
+                //检查localStorage中是否有数据
+                const temps = ly.store.get("LY_CART");
+                if (temps !== null) {
+                    //有数据，与redis合并
+                    temps.forEach(temp => {
+                        ly.http.post("/cart", {skuId: temp.skuId, num: temp.num}).then();
+                    });
+                    //合并后。删除本地数据
+                    ly.store.del("LY_CART");
+                }
                 leyou.http.post("/auth/accredit",leyou.stringify(this.form))
                     .then(resp => {
                         if(resp.status === 200){
