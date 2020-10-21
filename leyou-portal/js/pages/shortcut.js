@@ -1,5 +1,6 @@
 const shortcut = {
-    template: "\
+  template:
+    "\
     <div class='py-container'> \
         <div class='shortcut'> \
             <ul class='fl'> \
@@ -8,7 +9,7 @@ const shortcut = {
                Estimad@，<span style='color: cadetblue; font-weight: bold'>{{user.username}}</span>\
                </li>\
                <li v-else class='f-item'> \
-                   <a  @click='gotoLogin'>Iniciar Sesión</a>　 \
+                   <a  @click='gotoLogin'>Iniciar Sesión</a>\
                    <span><a @click='gotoRegister' target='_blank' style='color: slateblue'>Regístrate</a></span> \
                </li> \
            </ul> \
@@ -38,25 +39,25 @@ const shortcut = {
        </div> \
     </div>\
     ",
-    name: "shortcut",
-    data() {
-        return {
-            user: null
-        }
+  name: "shortcut",
+  data() {
+    return {
+      user: null,
+    };
+  },
+  created() {
+    ly.http("/auth/verify").then((resp) => {
+      this.user = resp.data;
+    });
+  },
+  methods: {
+    gotoLogin() {
+      window.location =
+        "http://www.leyou.com/login.html?returnUrl=" + window.location;
     },
-    created() {
-        ly.http("/auth/verify")
-            .then(resp => {
-                this.user = resp.data;
-            })
+    gotoRegister() {
+      window.location = "http://www.leyou.com/register.html";
     },
-    methods: {
-        gotoLogin() {
-            window.location = "http://www.leyou.com/login.html?returnUrl=" + window.location;
-        },
-        gotoRegister() {
-            window.location = "http://www.leyou.com/register.html";
-        }
-    }
-}
+  },
+};
 export default shortcut;
