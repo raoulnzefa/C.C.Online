@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 @Table(name = "tb_order")
 public class Order {
 

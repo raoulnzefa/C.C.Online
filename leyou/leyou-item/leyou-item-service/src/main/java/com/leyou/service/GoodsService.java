@@ -57,7 +57,7 @@ public class GoodsService {
                     Predicate pTitle = criteriaBuilder.like(root.get("title"), "%" + key + "%");
                     predicateList.add(pTitle);
                 }
-                //vendible o no
+                //alta o no
                 if (saleable != null) {
                     Predicate pSaleable = criteriaBuilder.equal(root.get("saleable").as(Boolean.class), saleable);
                     predicateList.add(pSaleable);
@@ -87,7 +87,7 @@ public class GoodsService {
                 Brand brand = optionalBrand.get();
                 spuBo.setBname(brand.getName());
             }
-            //Catálogo
+            //Categoría
             List<String> names = this.categoryService.queryNamesByIds(Arrays.asList(spu.getCid1(), spu.getCid2(), spu.getCid3()));
             spuBo.setCname(StringUtils.join(names, "-"));
 
