@@ -104,6 +104,7 @@ public class OrderService {
             UserInfo user = LoginInterceptor.getLoginUser();
             Pageable pageable = PageRequest.of(page - 1, rows);
             Page<Order> orderList;
+
             if (status != null) {
                 orderList = this.orderRepository.queryOrderList(user.getId(), status, pageable);
             } else {
@@ -111,6 +112,11 @@ public class OrderService {
             }
             List<Order> orderListContent = orderList.getContent();
             orderListContent.forEach(order -> {
+                Optional<OrderStatus> optionalOrderStatus = this.orderStatusRepository.findById(order.getOrderId());
+                if (optionalOrderStatus.isPresent()) {
+                    OrderStatus orderStatus = optionalOrderStatus.get();
+                    order.setStatus(orderStatus.getStatus());
+                }
                 List<OrderDetail> orderDetailList = this.orderDetailRepository.findByOrderId(order.getOrderId());
                 order.setOrderDetails(orderDetailList);
             });
@@ -167,5 +173,14 @@ public class OrderService {
             ids.add(orderDetail.getSkuId());
         });
         return ids;
+    }
+
+    /**
+     * Query orderStatus by orderId
+     * @param orderId
+     * @return
+     */
+    public OrderStatus queryOrderStatusById(Long orderId) {
+        return this.orderStatusRepository.findById(orderId).orElse(null);
     }
 }

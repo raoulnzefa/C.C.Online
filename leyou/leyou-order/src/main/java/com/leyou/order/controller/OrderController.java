@@ -2,6 +2,7 @@ package com.leyou.order.controller;
 
 import com.leyou.common.pojo.PageResult;
 import com.leyou.order.pojo.Order;
+import com.leyou.order.pojo.OrderStatus;
 import com.leyou.order.service.OrderService;
 import com.leyou.utils.PayHelper;
 import com.leyou.utils.PayState;
@@ -55,6 +56,26 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(order);
+    }
+
+    /**
+     * Query orderStatus by orderId
+     * @param orderId
+     * @return
+     */
+    @GetMapping("orderStatus/{id}")
+    @ApiOperation(value = "Query orderStatus by orderId", notes = "Query Order status")
+    @ApiImplicitParam(name = "id", required = true, value = "Order Id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "orderStatus"),
+            @ApiResponse(code = 404, message = "not found"),
+            @ApiResponse(code = 500, message = "query failed")})
+    public ResponseEntity<OrderStatus> queryOrderStatusById(@PathVariable("id") Long orderId) {
+        OrderStatus orderStatus = this.orderService.queryOrderStatusById(orderId);
+        if (orderStatus == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(orderStatus);
     }
 
     /**

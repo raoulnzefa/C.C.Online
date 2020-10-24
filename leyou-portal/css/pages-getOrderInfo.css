@@ -177,7 +177,7 @@ ul.payType li {
 
 .addr-item .address .edittext {
 	padding-left: 15px;
-	visibility: hidden
+	/*visibility: hidden*/
 }
 
 .address-hover {

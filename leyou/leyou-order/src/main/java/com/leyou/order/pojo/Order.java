@@ -1,5 +1,8 @@
 package com.leyou.order.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -10,6 +13,7 @@ import java.util.List;
 public class Order {
 
     @Id
+    @JsonSerialize(using = ToStringSerializer.class) //解决查询后显示页面上long类型精度损失问题
     private Long orderId;// id
     @NotNull
     private Long totalPay;// 总金额

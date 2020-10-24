@@ -1,462 +1,522 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
-    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
     <title>Leyou Mall-- Mis pedidos</title>
-    <link rel="icon" href="assets/img/favicon.ico" />
+    <link rel="icon" href="assets/img/favicon.ico"/>
 
-    <link rel="stylesheet" type="text/css" href="css/webbase.css" />
-    <link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css" />
-  </head>
+    <link rel="stylesheet" type="text/css" href="css/webbase.css"/>
+    <link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css"/>
+</head>
 
-  <body>
-    <!-- 头部栏位 -->
-    <!--页面顶部，由js动态加载-->
-    <script type="text/javascript" src="plugins/jquery/jquery.min.js"></script>
-    <div id="nav-bottom"></div>
-    <script type="text/javascript">
-      $("#nav-bottom").load("top.html");
-    </script>
+<body>
+<!-- 头部栏位 -->
+<!--页面顶部，由js动态加载-->
+<script type="text/javascript" src="plugins/jquery/jquery.min.js"></script>
+<div id="account">
+    <div id="nav-bottom">
+        <ly-top></ly-top>
+    </div>
 
     <script
-      type="text/javascript"
-      src="js/plugins/jquery/jquery.min.js"
+            type="text/javascript"
+            src="js/plugins/jquery/jquery.min.js"
     ></script>
     <script type="text/javascript">
-      $(function () {
-        $("#service").hover(
-          function () {
-            $(".service").show();
-          },
-          function () {
-            $(".service").hide();
-          }
-        );
-        $("#shopcar").hover(
-          function () {
-            $("#shopcarlist").show();
-          },
-          function () {
-            $("#shopcarlist").hide();
-          }
-        );
-      });
+        $(function () {
+            $("#service").hover(
+                function () {
+                    $(".service").show();
+                },
+                function () {
+                    $(".service").hide();
+                }
+            );
+            $("#shopcar").hover(
+                function () {
+                    $("#shopcarlist").show();
+                },
+                function () {
+                    $("#shopcarlist").hide();
+                }
+            );
+        });
     </script>
     <script
-      type="text/javascript"
-      src="js/plugins/jquery.easing/jquery.easing.min.js"
+            type="text/javascript"
+            src="js/plugins/jquery.easing/jquery.easing.min.js"
     ></script>
     <script type="text/javascript" src="js/plugins/sui/sui.min.js"></script>
     <script
-      type="text/javascript"
-      src="js/plugins/jquery-placeholder/jquery.placeholder.min.js"
+            type="text/javascript"
+            src="js/plugins/jquery-placeholder/jquery.placeholder.min.js"
     ></script>
     <script type="text/javascript" src="js/widget/nav.js"></script>
-  </body>
-  <!--header-->
-  <div id="account">
+
+    <!--header-->
+    <!--<div id="account">-->
     <div class="py-container">
-      <div class="yui3-g home">
-        <!--左侧列表-->
-        <div class="yui3-u-1-6 list">
-          <div class="person-info">
-            <div class="person-photo"><img src="img/_/photo.png" alt="" /></div>
-            <div class="person-account">
-              <span class="name">{{user.username}}</span>
-              <span class="safe"><a href="#" @click="logout">Logout</a></span>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-          <div class="list-items">
-            <dl>
-              <dt><i>·</i>centro de pedidos</dt>
-              <dd>
-                <a
-                  href="javascript:void(0)"
-                  @click="query.status=0"
-                  :class="{'list-active':query.status===0}"
-                  >我的订单</a
-                >
-              </dd>
-              <dd>
-                <a
-                  href="javascript:void(0)"
-                  @click="query.status=1"
-                  :class="{'list-active':query.status===1}"
-                  >待付款</a
-                >
-              </dd>
-              <dd>
-                <a
-                  href="javascript:void(0)"
-                  @click="query.status=2"
-                  :class="{'list-active':query.status===2}"
-                  >待发货</a
-                >
-              </dd>
-              <dd>
-                <a
-                  href="javascript:void(0)"
-                  @click="query.status=3"
-                  :class="{'list-active':query.status===3}"
-                  >待收货</a
-                >
-              </dd>
-              <dd>
-                <a
-                  href="javascript:void(0)"
-                  @click="query.status=4"
-                  :class="{'list-active':query.status===4}"
-                  >待评价</a
-                >
-              </dd>
-            </dl>
-            <dl>
-              <dt><i>·</i> Mi cuenta</dt>
-              <dd><a href="home-person-collect.html">我的收藏</a></dd>
-              <dd><a href="home-person-footmark.html">我的足迹</a></dd>
-            </dl>
-            <dl>
-              <dt><i>·</i> 物流消息</dt>
-            </dl>
-            <dl>
-              <dt><i>·</i> 设置</dt>
-              <dd><a href="home-setting-info.html">个人信息</a></dd>
-              <dd><a href="home-setting-address.html">地址管理</a></dd>
-              <dd><a href="home-setting-safe.html">安全管理</a></dd>
-            </dl>
-          </div>
-        </div>
-        <!--右侧主内容-->
-        <div class="yui3-u-5-6 order-pay">
-          <div class="body">
-            <div class="table-title">
-              <table class="sui-table order-table">
-                <tr>
-                  <thead>
-                    <th width="35%">宝贝</th>
-                    <th width="5%">单价</th>
-                    <th width="5%">数量</th>
-                    <th width="8%">商品操作</th>
-                    <th width="10%">实付款</th>
-                    <th width="10%">交易状态</th>
-                    <th width="10%">交易操作</th>
-                  </thead>
-                </tr>
-              </table>
-            </div>
-            <div class="order-detail">
-              <div class="orders">
-                <div class="choose-order">
-                  <div class="sui-pagination pagination-large top-pages">
-                    <ul>
-                      <li class="prev disabled"><a href="#">上一页</a></li>
-
-                      <li class="next"><a href="#">下一页</a></li>
-                    </ul>
-                  </div>
+        <div class="yui3-g home">
+            <!--左侧列表-->
+            <div class="yui3-u-1-6 list">
+                <div class="person-info">
+                    <div class="person-photo"><img src="img/_/photo.png" alt=""/></div>
+                    <div class="person-account">
+                        <span class="name">{{user.username}}</span>
+                        <span class="safe"><a href="#" @click="logout">Logout</a></span>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-
-                <!--order1-->
-                <div v-for="(o, i) in orders" :key="i">
-                  <div class="choose-title">
-                    <label data-toggle="checkbox" class="checkbox-pretty">
-                      <input type="checkbox" checked="checked" />
-                      <span
-                        >{{formatDate(o.createTime)}}　订单编号：{{o.orderId}}
-                        <a>联系客服</a></span
-                      >
-                    </label>
-                    <a class="sui-btn btn-info share-btn">分享</a>
-                  </div>
-                  <table class="sui-table table-bordered order-datatable">
-                    <tbody>
-                      <tr v-for="(d,j) in o.orderDetails" :key="j">
-                        <td width="35%">
-                          <div class="typographic">
-                            <img width="70px" height="70px" :src="d.image" />
-                            <a href="#" class="block-text">包邮 {{d.title}}</a>
-                            <span
-                              class="guige"
-                              v-for="(v,k) in JSON.parse(d.ownSpec)"
-                              :key="k"
-                              >{{k+':'+ v}}</span
+                <div class="list-items">
+                    <dl>
+                        <dt><i>·</i>centro de pedidos</dt>
+                        <dd>
+                            <a
+                                    href="javascript:void(0)"
+                                    @click="query.status=0"
+                                    :class="{'list-active':query.status===0}"
+                            >Mis pedidos</a
                             >
-                          </div>
-                        </td>
-                        <td width="5%" class="center">
-                          <ul class="unstyled">
-                            <li>¥{{formatPrice(d.price)}}</li>
-                          </ul>
-                        </td>
-                        <td width="5%" class="center">{{d.num}}</td>
-                        <td
-                          width="8%"
-                          class="center"
-                          :rowspan="o.orderDetails.length"
-                          v-if="j === 0"
-                        >
-                          <ul class="unstyled" v-if="o.status === 3">
-                            <li>已发货</li>
-                            <li><a>退货/退款</a></li>
-                          </ul>
-                        </td>
-                        <td
-                          width="10%"
-                          class="center"
-                          :rowspan="o.orderDetails.length"
-                          v-if="j === 0"
-                        >
-                          <ul class="unstyled">
-                            <li>¥{{formatPrice(getTotalPrice(o))}}</li>
-                            <li>（含运费：￥0.00）</li>
-                          </ul>
-                        </td>
-                        <td
-                          width="10%"
-                          class="center"
-                          :rowspan="o.orderDetails.length"
-                          v-if="j === 0"
-                        >
-                          <ul class="unstyled">
-                            <li v-if="o.status === 1">等待买家付款</li>
-                            <li v-if="o.status === 2">已付款</li>
-                            <li v-if="o.status === 3">已发货</li>
-                            <li>
-                              <a href="home-orderDetail.html" class="btn"
-                                >订单详情
-                              </a>
-                            </li>
-                          </ul>
-                        </td>
-                        <td
-                          width="10%"
-                          class="center"
-                          :rowspan="o.orderDetails.length"
-                          v-if="j === 0"
-                        >
-                          <ul class="unstyled">
-                            <li v-if="o.status === 1">
-                              <a href="#" class="sui-btn btn-info">立即付款</a>
-                            </li>
-                            <li v-if="o.status === 2">
-                              <a href="#" class="sui-btn btn-info">提醒发货</a>
-                            </li>
-                            <li v-if="o.status === 3">
-                              <a href="#" class="sui-btn btn-info">确认收货</a>
-                            </li>
-                            <li v-if="o.status === 3">4天23时后自动确认</li>
-                            <li><a href="javascript:void(0)">取消订单</a></li>
-                          </ul>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                        </dd>
+                        <dd>
+                            <a
+                                    href="javascript:void(0)"
+                                    @click="query.status=1"
+                                    :class="{'list-active':query.status===1}"
+                            >pendientes de pagar</a
+                            >
+                        </dd>
+                        <dd>
+                            <a
+                                    href="javascript:void(0)"
+                                    @click="query.status=2"
+                                    :class="{'list-active':query.status===2}"
+                            >pendientes de enviar</a
+                            >
+                        </dd>
+                        <dd>
+                            <a
+                                    href="javascript:void(0)"
+                                    @click="query.status=3"
+                                    :class="{'list-active':query.status===3}"
+                            >pendientes de recibir</a
+                            >
+                        </dd>
+                        <dd>
+                            <a
+                                    href="javascript:void(0)"
+                                    @click="query.status=4"
+                                    :class="{'list-active':query.status===4}"
+                            >pendientes de comentar</a
+                            >
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><i>·</i> Mi cuenta</dt>
+                        <dd><a href="home-person-collect.html">Mis favoritos</a></dd>
+                        <dd><a href="home-person-footmark.html">Mi historia de visita</a></dd>
+                    </dl>
+                    <dl>
+                        <dt><i>·</i> Seguimiento</dt>
+                    </dl>
+                    <dl>
+                        <dt><i>·</i> Configuración</dt>
+                        <dd><a href="home-setting-info.html">dato personal</a></dd>
+                        <dd><a href="home-setting-address.html">direcciones</a></dd>
+                        <dd><a href="home-setting-safe.html">seguridad</a></dd>
+                    </dl>
                 </div>
-              </div>
-              <div class="choose-order">
-                <div class="sui-pagination pagination-large top-pages">
-                  <ul>
-                    <li class="prev disabled"><a href="#">«上一页</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li class="dotted"><span>...</span></li>
-                    <li class="next"><a href="#">下一页»</a></li>
-                  </ul>
-                  <div>
-                    <span>共10页&nbsp;</span
+            </div>
+            <!--右侧主内容-->
+            <div class="yui3-u-5-6 order-pay">
+                <div class="body">
+                    <div class="table-title">
+                        <table class="sui-table order-table">
+                            <tr>
+                                <thead>
+                                <th width="35%">Artículos</th>
+                                <th width="5%">Precio</th>
+                                <th width="5%">Cantidad</th>
+                                <th width="8%">Op.</th>
+                                <th width="10%">Importe pagado</th>
+                                <th width="10%">Estado</th>
+                                <th width="10%">Op. de pedido</th>
+                                </thead>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="order-detail">
+                        <div class="orders">
+                            <div class="choose-order">
+                                <div class="sui-pagination pagination-large top-pages">
+                                    <ul>
+                                        <li class="prev disabled"><a @click="prevPage">Pre.</a></li>
+
+                                        <li class="next"><a @click="nextPage">Next</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!--order1-->
+                            <div v-for="(o, i) in orders" :key="i">
+                                <div class="choose-title">
+                                    <label data-toggle="checkbox" class="checkbox-pretty">
+                                        <input type="checkbox" checked="checked"/>
+                                        <span
+                                        >{{formatDate(o.createTime)}}　Número de pedido：{{o.orderId}}
+                        <a>Atención de cliente</a></span
+                                        >
+                                    </label>
+                                    <a class="sui-btn btn-info share-btn">Compartir</a>
+                                </div>
+                                <table class="sui-table table-bordered order-datatable">
+                                    <tbody>
+                                    <tr v-for="(d,j) in o.orderDetails" :key="j">
+                                        <td width="35%">
+                                            <div class="typographic">
+                                                <img width="70px" height="70px" :src="d.image"/>
+                                                <a href="#" class="block-text">porte gratis {{d.title}}</a>
+                                                <span
+                                                        class="guige"
+                                                        v-for="(v,k) in JSON.parse(d.ownSpec)"
+                                                        :key="k"
+                                                >{{v}}</span>
+                                            </div>
+                                        </td>
+                                        <td width="5%" class="center">
+                                            <ul class="unstyled">
+                                                <li>¥{{formatPrice(d.price)}}</li>
+                                            </ul>
+                                        </td>
+                                        <td width="5%" class="center">{{d.num}}</td>
+                                        <td
+                                                width="8%"
+                                                class="center"
+                                                :rowspan="o.orderDetails.length"
+                                                v-if="j === 0"
+                                        >
+                                            <ul class="unstyled" v-if="o.status === 3">
+                                                <li>已发货</li>
+                                                <li><a>退货/退款</a></li>
+                                            </ul>
+                                        </td>
+                                        <td
+                                                width="10%"
+                                                class="center"
+                                                :rowspan="o.orderDetails.length"
+                                                v-if="j === 0"
+                                        >
+                                            <ul class="unstyled">
+                                                <li>¥{{formatPrice(getTotalPrice(o))}}</li>
+                                                <li>（Portes：￥0.00）</li>
+                                            </ul>
+                                        </td>
+                                        <td
+                                                width="10%"
+                                                class="center"
+                                                :rowspan="o.orderDetails.length"
+                                                v-if="j === 0"
+                                        >
+                                            <ul class="unstyled">
+                                                <li v-if="o.status === 1">Pendiente de pagar</li>
+                                                <li v-if="o.status === 2">Pagado</li>
+                                                <li v-if="o.status === 3">Enviado</li>
+                                                <li v-if="o.status === 4">Pend. de comentar</li>
+                                                <li v-if="o.status === 5">Cancelado</li>
+                                                <li v-if="o.status === 6">Finalizado</li>
+                                                <li>
+                                                    <a href="home-orderDetail.html" @click.prevent="toOrderDetails(o.orderId)" class="btn">Detalle</a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td
+                                                width="10%"
+                                                class="center"
+                                                :rowspan="o.orderDetails.length"
+                                                v-if="j === 0"
+                                        >
+                                            <ul class="unstyled">
+                                                <li v-if="o.status === 1">
+                                                    <a href="#" @click="payment(o.orderId, getTotalPrice(o))" class="sui-btn btn-info">A pagar</a>
+                                                </li>
+                                                <li v-if="o.status === 2">
+                                                    <a href="#" @click="deliver(o.orderId)" class="sui-btn btn-info">Recordar a enviar</a>
+                                                </li>
+                                                <li v-if="o.status === 3">
+                                                    <a href="#" @click="receiveGoods(o.orderId)" class="sui-btn btn-info">Confirmar la entrega</a>
+                                                </li>
+                                                <li v-if="o.status === 4">
+                                                    <a href="#" @click="review(o.orderId)" class="sui-btn btn-info">A comentar</a>
+                                                </li>
+                                                <li v-if="o.status === 3">Auto-Confirma en 4 días</li>
+                                                <li><a v-if="o.status === 1" href="javascript:void(0)" @click="cancelOrder(o.orderId)">Cancelar el pedido</a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="choose-order">
+                            <div class="sui-pagination pagination-large top-pages">
+                                <ul>
+                                    <li class="prev disabled"><a @click="prevPage">«Pre.</a></li>
+                                    <li :class="{active: index(i) === query.page}" v-for="i in Math.min(5, totalPage)"
+                                        :key="i">
+                                        <a @click="query.page = index(i)">{{index(i)}}</a>
+                                    </li>
+                                    <li class="dotted" v-show="totalPage > 5"><span>...</span></li>
+                                    <li :class="{next:true, disabled:query.page === totalPage}"><a @click="nextPage">Next»</a>
+                                    </li>
+                                </ul>
+                                <div>
+                    <span>En total: {{totalPage}} Pag.&nbsp;&nbsp;</span
                     ><span>
-                      到
-                      <input type="text" class="page-num" /><button
-                        class="page-confirm"
-                        onclick="alert(1)"
-                      >
-                        确定
-                      </button>
-                      页</span
-                    >
-                  </div>
+                      Ir a
+                      <input type="text" class="page-num" ref="page"/>
+                                    <button
+                                            class="page-confirm"
+                                            @click="navPage"
+                                    >确定</button></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="like-title">
+                        <div class="mt">
+                            <span class="fl"><strong>热卖单品</strong></span>
+                        </div>
+                    </div>
+                    <div class="like-list">
+                        <ul class="yui3-g">
+                            <li class="yui3-u-1-4">
+                                <div class="list-wrap">
+                                    <div class="p-img">
+                                        <img src="img/_/itemlike01.png"/>
+                                    </div>
+                                    <div class="attr">
+                                        <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
+                                    </div>
+                                    <div class="price">
+                                        <strong>
+                                            <em>¥</em>
+                                            <i>3699.00</i>
+                                        </strong>
+                                    </div>
+                                    <div class="commit">
+                                        <i class="command">已有6人评价</i>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="yui3-u-1-4">
+                                <div class="list-wrap">
+                                    <div class="p-img">
+                                        <img src="img/_/itemlike02.png"/>
+                                    </div>
+                                    <div class="attr">
+                                        <em>Apple苹果iPhone 6s/6s Plus 16G 64G 128G</em>
+                                    </div>
+                                    <div class="price">
+                                        <strong>
+                                            <em>¥</em>
+                                            <i>4388.00</i>
+                                        </strong>
+                                    </div>
+                                    <div class="commit">
+                                        <i class="command">已有700人评价</i>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="yui3-u-1-4">
+                                <div class="list-wrap">
+                                    <div class="p-img">
+                                        <img src="img/_/itemlike03.png"/>
+                                    </div>
+                                    <div class="attr">
+                                        <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
+                                    </div>
+                                    <div class="price">
+                                        <strong>
+                                            <em>¥</em>
+                                            <i>4088.00</i>
+                                        </strong>
+                                    </div>
+                                    <div class="commit">
+                                        <i class="command">已有700人评价</i>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="yui3-u-1-4">
+                                <div class="list-wrap">
+                                    <div class="p-img">
+                                        <img src="img/_/itemlike04.png"/>
+                                    </div>
+                                    <div class="attr">
+                                        <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
+                                    </div>
+                                    <div class="price">
+                                        <strong>
+                                            <em>¥</em>
+                                            <i>4088.00</i>
+                                        </strong>
+                                    </div>
+                                    <div class="commit">
+                                        <i class="command">已有700人评价</i>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-              </div>
-
-              <div class="clearfix"></div>
             </div>
-
-            <div class="like-title">
-              <div class="mt">
-                <span class="fl"><strong>热卖单品</strong></span>
-              </div>
-            </div>
-            <div class="like-list">
-              <ul class="yui3-g">
-                <li class="yui3-u-1-4">
-                  <div class="list-wrap">
-                    <div class="p-img">
-                      <img src="img/_/itemlike01.png" />
-                    </div>
-                    <div class="attr">
-                      <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
-                    </div>
-                    <div class="price">
-                      <strong>
-                        <em>¥</em>
-                        <i>3699.00</i>
-                      </strong>
-                    </div>
-                    <div class="commit">
-                      <i class="command">已有6人评价</i>
-                    </div>
-                  </div>
-                </li>
-                <li class="yui3-u-1-4">
-                  <div class="list-wrap">
-                    <div class="p-img">
-                      <img src="img/_/itemlike02.png" />
-                    </div>
-                    <div class="attr">
-                      <em>Apple苹果iPhone 6s/6s Plus 16G 64G 128G</em>
-                    </div>
-                    <div class="price">
-                      <strong>
-                        <em>¥</em>
-                        <i>4388.00</i>
-                      </strong>
-                    </div>
-                    <div class="commit">
-                      <i class="command">已有700人评价</i>
-                    </div>
-                  </div>
-                </li>
-                <li class="yui3-u-1-4">
-                  <div class="list-wrap">
-                    <div class="p-img">
-                      <img src="img/_/itemlike03.png" />
-                    </div>
-                    <div class="attr">
-                      <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
-                    </div>
-                    <div class="price">
-                      <strong>
-                        <em>¥</em>
-                        <i>4088.00</i>
-                      </strong>
-                    </div>
-                    <div class="commit">
-                      <i class="command">已有700人评价</i>
-                    </div>
-                  </div>
-                </li>
-                <li class="yui3-u-1-4">
-                  <div class="list-wrap">
-                    <div class="p-img">
-                      <img src="img/_/itemlike04.png" />
-                    </div>
-                    <div class="attr">
-                      <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
-                    </div>
-                    <div class="price">
-                      <strong>
-                        <em>¥</em>
-                        <i>4088.00</i>
-                      </strong>
-                    </div>
-                    <div class="commit">
-                      <i class="command">已有700人评价</i>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <!-- 底部栏位 -->
-  <!--页面底部，由js动态加载-->
-  <div class="clearfix footer"></div>
-  <script type="text/javascript">
+<!-- 底部栏位 -->
+<!--页面底部，由js动态加载-->
+<div class="clearfix footer"></div>
+<script type="text/javascript">
     $(".footer").load("foot.html");
-  </script>
-  <!--页面底部END-->
-
-  <script src="./js/vue/vue.js"></script>
-  <script src="./js/axios.min.js"></script>
-  <script src="./js/common.js"></script>
-  <script src="./js/plugins/jquery/jquery.cookie.js"></script>
-  <script type="text/javascript">
+</script>
+<!--页面底部END-->
+</body>
+<script src="./js/vue/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script src="./js/common.js"></script>
+<script src="./js/plugins/jquery/jquery.cookie.js"></script>
+<script type="text/javascript">
     var vm = new Vue({
-      el: "#account",
-      data: {
-        user: {},
-        orders: [],
-        query: {
-          status: 0,
-          page: 1,
-          rows: 5,
+        el: "#account",
+        data: {
+            ly,
+            user: {},
+            orders: [],
+            total: 0, //总条数
+            totalPage: 0, //总页数
+            query: {
+                status: 0,
+                page: 1,
+                rows: 5,
+            },
         },
-      },
-      created() {
-        const token = Cookies.get("LY_TOKEN");
-        if (token) {
-          // 有token，曾经登录过，查询用户信息
-          ly.http
-            .get("/user/" + token)
-            .then((resp) => {
-              this.user = resp.data;
-              // 查询订单信息
-              this.loadOrder();
-            })
-            .catch(() => {
-              // 去登录
-              this.gotoLogin();
-            });
-        } else {
-          // 去登录
-          this.gotoLogin();
-        }
-      },
-      methods: {
-        logout() {
-          // 删除cookie中的token即可
-          Cookies.remove("LY_TOKEN", {
-            path: "/",
-            domain: "leyou.com",
-          });
-          window.location = "http://www.leyou.com";
+        components: {
+            lyTop: () => import("./js/pages/top.js"),
         },
-        gotoLogin() {
-          window.location = "login.html?returnUrl=" + window.location;
-        },
-        loadOrder() {
-          // 查询订单信息
-          ly.http
-            .get("/order/list?" + ly.stringify(this.query))
-            .then(({ data: { items, total } }) => {
-              this.orders = items;
-            })
-            .catch(() => (this.orders = []));
-        },
-        formatDate: ly.formatDate,
-        formatPrice: ly.formatPrice,
-        getTotalPrice(order) {
-          return order.orderDetails
-            .map((d) => d.num * d.price)
-            .reduce((v1, v2) => v1 + v2, 0);
-        },
-      },
-      watch: {
-        query: {
-          deep: true,
-          handler() {
+        created() {
             this.loadOrder();
-          },
         },
-      },
+        methods: {
+            navPage() {
+              this.query.page = this.$refs.page.value;
+            },
+            index(i) {
+              if (this.query.page <= 3 || this.totalPage <= 5) {
+                  return i;
+              }  else if (this.query.page > this.totalPage - 3) {
+                  return this.totalPage - 5 + i;
+              }else if (this.query.page > 3) {
+                  return this.query.page - 3 + i;
+              }
+            },
+            prevPage() {
+              if (this.query.page > 1) {
+                  this.query.page --;
+              }
+            },
+            nextPage() {
+              if (this.query.page < this.totalPage) {
+                  this.query.page ++;
+              }
+            },
+            logout() {
+                // 删除cookie中的token即可
+                Cookies.remove("LY_TOKEN", {
+                    path: "/",
+                    domain: "leyou.com",
+                });
+                window.location = "http://www.leyou.com";
+            },
+            gotoLogin() {
+                window.location = "login.html?returnUrl=" + window.location;
+            },
+            loadOrder() {
+                ly.verify().then(resp => {
+                    this.user = resp.data;
+                    // 查询订单信息
+                    ly.http.get("order/order/list?" + ly.stringify(this.query))
+                        .then(({data: {items, total, totalPage}}) => {
+                            this.orders = items;
+                            this.total = total;
+                            this.totalPage = totalPage;
+                        }).catch(() => this.orders = [])
+                }).catch(() => {
+                    this.gotoLogin();
+                });
+            },
+            updateOrderState(orderId, status) {
+              ly.verify().then(() => {
+                  ly.http.put("/order/order/" + orderId + "/" + status).then(() => {
+                      this.loadOrder();
+                  })
+              }).catch(() => {
+                  this.gotoLogin();
+              })
+            },
+            //付款
+            payment(orderId, totalPay) {
+              this.updateOrderState(orderId, 2);
+              window.location = "/pay.html";
+              ly.store.set("totalPay", totalPay);
+              ly.store.set("orderId", orderId);
+            },
+            //取消订单
+            cancelOrder(orderId) {
+                this.updateOrderState(orderId, 5);
+            },
+            //提醒发货
+            deliver(orderId) {
+                this.updateOrderState(orderId, 3);
+            },
+            //确认收货
+            receiveGoods(orderId) {
+                this.updateOrderState(orderId, 4);
+            },
+            //评价
+            review(orderId) {
+              this.updateOrderState(orderId, 6);
+            },
+            formatDate: ly.formatDate,
+            formatPrice: ly.formatPrice,
+            getTotalPrice(order) {
+                return order.orderDetails
+                    .map((d) => d.num * d.price)
+                    .reduce((v1, v2) => v1 + v2, 0);
+            },
+            toOrderDetails(orderId) {
+                ly.verify().then((resp) => {
+                    ly.store.set("orderId", orderId);
+                    window.location = '/home-orderDetail.html';
+                }).catch(()=>{
+                    window.location =
+                        "http://www.leyou.com/login.html?returnUrl=" + window.location.href;
+                })
+            },
+        },
+        watch: {
+            //当页数发生改变时，重新加载数据
+            query: {
+                deep: true,
+                handler() {
+                    this.loadOrder();
+                },
+            },
+        },
     });
-  </script>
+</script>
 </html>
