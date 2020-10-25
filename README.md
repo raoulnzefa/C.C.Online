@@ -1,11 +1,10 @@
 # C.C.Online
 online shopping mall, Centro comercial-ventas online
-Leyou Mall is a full category of e-commerce shopping website (B2C).
-- Users can purchase goodsonline, add to the shopping cart, place orders and pay for it as well as tracing the parcel.
-- The administrator can manage the dismounting and promotion activities of goods in the background.
-- The administrator can monitor the sales status of products.
-- Hope to support tens of millions of users in the next 3 to 5 years.
-  The project structure is:
+Leyou Mall es una página web de e-commerce shopping website (B2C), que incluye una categoría completa.
+- Los usuarios pueden buscar productos, hacer compras on line, añadir artículos al carrito, hacer pedidos y pagarlos. También se pueden consultar el seguimiento y hacer comentarios.
+- Los administradores pueden manejar el alta y baja de productos, CRUD categorías, marcas, productos y especificaciones.
+- Se aplican micro-servicios para soportar una gran cantidad de visitas.
   
+  The project structure is:
 ![The project structure is:](https://github.com/Nereitay/C.C.Online/blob/master/image/Project%20Structure.jpg)
 
