@@ -9,5 +9,5 @@ Leyou Mall is a full category of e-commerce shopping website (B2C).
 
 - Hope to support tens of millions of users in the next 3 to 5 years.
   The project structure is:
-![The project structure is:](.\image\Project Structure.jpg)
+![The project structure is:](https://github.com/Nereitay/C.C.Online/blob/master/image/Project%20Structure.jpg)
 
