@@ -14,6 +14,9 @@ online shopping mall, Centro comercial-ventas online.
 El proyecto se practican con 12 microservicios:
 ![microservicios:](https://github.com/Nereitay/C.C.Online/blob/master/image/microservicios.png)
 
+Administración:
+![manage:](https://github.com/Nereitay/C.C.Online/blob/master/image/manage.png)
+
 Search service:
 ![search:](https://github.com/Nereitay/C.C.Online/blob/master/image/search.png)
 ![search2:](https://github.com/Nereitay/C.C.Online/blob/master/image/search2.png)
@@ -29,8 +32,17 @@ Mi cesta:
 Mi pedido:
 ![pedido:](https://github.com/Nereitay/C.C.Online/blob/master/image/pedido.png)
 
+Modificar y añadir dirección de entrega:
+![direccion:](https://github.com/Nereitay/C.C.Online/blob/master/image/direccion.png)
+
 pagado:
 ![pagado:](https://github.com/Nereitay/C.C.Online/blob/master/image/pagado.png)
+
+Mi cuenta:
+![cuenta:](https://github.com/Nereitay/C.C.Online/blob/master/image/cuenta.png)
+
+El detalle del pedido:
+![detalle:](https://github.com/Nereitay/C.C.Online/blob/master/image/detalle.png)
 
 
 
