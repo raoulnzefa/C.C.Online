@@ -17,10 +17,20 @@ El proyecto se practican con 12 microservicios:
 Search service:
 ![search:](https://github.com/Nereitay/C.C.Online/blob/master/image/search.png)
 ![search2:](https://github.com/Nereitay/C.C.Online/blob/master/image/search2.png)
+![goods:](https://github.com/Nereitay/C.C.Online/blob/master/image/goods.png)
 
-Login & Register
-![login:](https://github.com/Nereitay/C.C.Online/blob/master/image/login.png)
+Login & Register:
+![login:](https://github.com/Nereitay/C.C.Online/blob/master/image/Login.png)
 ![register:](https://github.com/Nereitay/C.C.Online/blob/master/image/register.png)
+
+Mi cesta:
+![cesta:](https://github.com/Nereitay/C.C.Online/blob/master/image/cesta.png)
+
+Mi pedido:
+![pedido:](https://github.com/Nereitay/C.C.Online/blob/master/image/pedido.png)
+
+pagado:
+![pagado:](https://github.com/Nereitay/C.C.Online/blob/master/image/pagado.png)
 
 
 
