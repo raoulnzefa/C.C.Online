@@ -13,19 +13,19 @@ import java.security.PublicKey;
 @ConfigurationProperties(prefix = "leyou.jwt")
 public class JwtProperties {
 
-    private String secret; // 密钥
+    private String secret;
 
-    private String pubKeyPath;// 公钥
+    private String pubKeyPath;
 
-    private String priKeyPath;// 私钥
+    private String priKeyPath;
 
-    private int expire;// token过期时间
+    private int expire;// token expiration time
 
     private String cookieName;
 
-    private PublicKey publicKey; // 公钥
+    private PublicKey publicKey;
 
-    private PrivateKey privateKey; // 私钥
+    private PrivateKey privateKey;
 
     private static final Logger logger = LoggerFactory.getLogger(JwtProperties.class);
 

@@ -13,9 +13,9 @@ eureka:
     lease-expiration-duration-in-seconds: 15
 leyou:
   jwt:
-    secret: leyou@Login(Auth}*^31)&heiMa% # 登录校验的密钥
-    pubKeyPath: F:\\ideawork\\leyoumall\\tmp\\rsa.pub # 公钥地址
-    priKeyPath: F:\\ideawork\\leyoumall\\tmp\\rsa.pri # 私钥地址
-    expire: 30 # 过期时间,单位分钟
+    secret: leyou@Login(Auth}*^31)&heiMa%
+    pubKeyPath: F:\\ideawork\\leyoumall\\tmp\\rsa.pub
+    priKeyPath: F:\\ideawork\\leyoumall\\tmp\\rsa.pri
+    expire: 30 # unit: minutes
     cookieName: LY_TOKEN
 
