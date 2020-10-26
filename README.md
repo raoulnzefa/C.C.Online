@@ -14,8 +14,13 @@ online shopping mall, Centro comercial-ventas online.
 El proyecto se practican con 12 microservicios:
 ![microservicios:](https://github.com/Nereitay/C.C.Online/blob/master/image/microservicios.png)
 
+La Interpretacion de tecnología:
+- 
+
 Administración:
 ![manage:](https://github.com/Nereitay/C.C.Online/blob/master/image/manage.png)
+
+
 
 Search service:
 ![search:](https://github.com/Nereitay/C.C.Online/blob/master/image/search.png)
