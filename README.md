@@ -17,6 +17,7 @@ El proyecto se practican con 12 microservicios:
 ![microservicios:](https://github.com/Nereitay/C.C.Online/blob/master/image/microservicios.png)
 
 La Interpretacion de tecnología:
+- La combinación de tecnologías anterior puede resolver los siguientes problemas típicos en el e-commerce proyecto.
 - 
 
 Administración:
@@ -29,6 +30,8 @@ Search service:
 -
 ![search:](https://github.com/Nereitay/C.C.Online/blob/master/image/search.png)
 ![search2:](https://github.com/Nereitay/C.C.Online/blob/master/image/search2.png)
+Static page web:
+-
 ![goods:](https://github.com/Nereitay/C.C.Online/blob/master/image/goods.png)
 
 Login & Register:
