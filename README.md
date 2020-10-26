@@ -8,4 +8,7 @@ Leyou Mall es una página web de e-commerce shopping website (B2C), que incluye 
   La estructura del proyecto:
 ![The project structure is:](https://github.com/Nereitay/C.C.Online/blob/master/image/Project%20Structure.jpg)
 
+El proyecto se practican con 12 microservicios:
+![microservicios:](https://github.com/Nereitay/C.C.Online/blob/master/image/microservicios.png)
+
 
