@@ -46,22 +46,14 @@ public class UserService {
         Specification<User> spec = new Specification<User>() {
             @Override
             public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-                /*if (type == 1) {
+                if (type == 1) {
                     return  criteriaBuilder.equal(root.get("username"), data);
                 } else if (type == 2) {
                     return  criteriaBuilder.equal(root.get("phone"), data);
                 } else {
                     return null;
-                }*/
-                switch(type) {
-                    case 1:
-                        return criteriaBuilder.equal(root.get("username"), data);
-                    case 2:
-                        return criteriaBuilder.equal(root.get("phone"), data);
-                    default:
-                        return null;
                 }
-            }
+                
         };
         return this.userRepository.count(spec) == 0;
     }
