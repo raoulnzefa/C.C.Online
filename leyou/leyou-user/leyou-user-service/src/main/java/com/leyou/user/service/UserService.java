@@ -47,13 +47,13 @@ public class UserService {
             @Override
             public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
                 if (type == 1) {
-                    return  criteriaBuilder.equal(root.get("username"), data);
+                    return criteriaBuilder.equal(root.get("username"), data);
                 } else if (type == 2) {
-                    return  criteriaBuilder.equal(root.get("phone"), data);
+                    return criteriaBuilder.equal(root.get("phone"), data);
                 } else {
                     return null;
                 }
-                
+            }
         };
         return this.userRepository.count(spec) == 0;
     }
