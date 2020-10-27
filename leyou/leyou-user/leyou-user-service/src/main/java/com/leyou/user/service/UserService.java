@@ -9,12 +9,10 @@ import com.leyou.user.utils.CodecUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.mock.web.DelegatingServletInputStream;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -102,16 +100,16 @@ public class UserService {
             if (!StringUtils.equals(code, redisCode)) {
                 throw new LyException(ExceptionEnum.INVALID_VERIFY_CODE);
             }
-            //3.生成盐
+            //3.generar salt
             String salt = CodecUtils.generateSalt();
             user.setSalt(salt);
-            //4.加盐加密
+            //4.añadir la sal y cifrar la
             user.setPassword(CodecUtils.md5Hex(user.getPassword(), salt));
-            //5.新增用户
+            //5.añadir nuevo usuario
             user.setId(null);
             user.setCreated(new Date());
             this.userRepository.save(user);
-            //6. elimina el código en redis
+            //6. elimina el código desde redis
             this.redisTemplate.delete(KEY_PREFIX + user.getPhone());
         }
 
@@ -130,12 +128,12 @@ public class UserService {
                 }
             };
             Optional<User> optionalUser = this.userRepository.findOne(spec);
-            //判断user是否为空
+            //verificar si el usuario existe
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
-                //获取盐 对用户输入的密码加盐加密
+                //obtener el salt y añadir salt y cifrar el password insertado
                 password = CodecUtils.md5Hex(password, user.getSalt());
-                //和数据库中密码比较
+                //compararlo con el password en el database
                 if (StringUtils.equals(password, user.getPassword())) {
                     return user;
                 }
