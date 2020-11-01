@@ -28,7 +28,11 @@ Cesta　Cart-service:
 -
 ![cart](https://github.com/Nereitay/C.C.Online/blob/master/image/cart.png)
 
-La Interpretacion de tecnología:
+Relación de "call" entre item-service, cart-service y order-service
+-
+![item](https://github.com/Nereitay/C.C.Online/blob/master/image/item.png)
+
+La Interpretación de tecnología:
 - La combinación de tecnologías anterior puede resolver los siguientes problemas típicos en el e-commerce proyecto.
 - El nodo. js y Vue.js se aplican para realizar el desarrollo de front-end y back-end por separado.
 - Se basa en SpringBoot2.0 y la versión de SpringCloud finchley.rc1 para realizar los microservicios.
