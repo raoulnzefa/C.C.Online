@@ -16,6 +16,18 @@ El proyecto se practican con 12 microservicios:
 -
 ![microservicios:](https://github.com/Nereitay/C.C.Online/blob/master/image/microservicios.png)
 
+Zuul gateway-service:
+- 
+![zuul](https://github.com/Nereitay/C.C.Online/blob/master/image/zuul.png)
+
+JWT＆RSA　Auth-service:
+-
+![auth](https://github.com/Nereitay/C.C.Online/blob/master/image/Rsa.png)
+
+Cesta　Cart-service:
+-
+![cart](https://github.com/Nereitay/C.C.Online/blob/master/image/cart.png)
+
 La Interpretacion de tecnología:
 - La combinación de tecnologías anterior puede resolver los siguientes problemas típicos en el e-commerce proyecto.
 - El nodo. js y Vue.js se aplican para realizar el desarrollo de front-end y back-end por separado.
