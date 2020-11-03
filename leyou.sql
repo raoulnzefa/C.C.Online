@@ -11,7 +11,7 @@
  Target Server Version : 50645
  File Encoding         : 65001
 
- Date: 03/11/2020 19:30:44
+ Date: 03/11/2020 19:52:43
 */
 
 SET NAMES utf8mb4;
@@ -54,7 +54,7 @@ CREATE TABLE `tb_brand`  (
   `image` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'address of brands\' images',
   `letter` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'first letter of brands',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 325410 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '品牌表，一个品牌下有多个商品（spu），一对多关系' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 325410 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'brand table, a brand can have more than one spu, one to many' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tb_brand
@@ -236,7 +236,7 @@ CREATE TABLE `tb_category`  (
   `sort` int(4) NOT NULL COMMENT 'index for sorting, the smaller the nearer front',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `key_parent_id`(`parent_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1424 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品类目表，类目和商品(spu)是一对多关系，类目与品牌是多对多关系' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 1424 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'category table, category vs spu => one to many; category vs brand => many to many' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tb_category
@@ -1668,7 +1668,7 @@ CREATE TABLE `tb_category_brand`  (
   `category_id` bigint(20) NOT NULL COMMENT 'Category id',
   `brand_id` bigint(20) NOT NULL COMMENT 'Brand id',
   PRIMARY KEY (`category_id`, `brand_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品分类和品牌的中间表，两者是多对多关系' ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'junction table for category table and brand table which have a many to many relationship ' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tb_category_brand
@@ -1983,7 +1983,7 @@ CREATE TABLE `tb_order_detail`  (
   `image` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'products images',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `key_order_id`(`order_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 220 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单详情表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 220 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'order detail table' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tb_order_detail
@@ -2202,7 +2202,7 @@ CREATE TABLE `tb_order_status`  (
   `comment_time` datetime(0) NULL DEFAULT NULL COMMENT 'comment time',
   PRIMARY KEY (`order_id`) USING BTREE,
   INDEX `status`(`status`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单状态表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'order status table' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tb_order_status
@@ -2343,7 +2343,7 @@ CREATE TABLE `tb_sku`  (
   `last_update_time` datetime(0) NOT NULL COMMENT 'last modified time',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `key_spu_id`(`spu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27359021765 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'sku表,该表表示具体的商品实体,如黑色的 64g的iphone 8' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 27359021765 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'sku table represents specific product entity, like black 64G iphone8' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tb_sku
@@ -3029,7 +3029,7 @@ CREATE TABLE `tb_spec_group`  (
   `name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'group name',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `key_category`(`cid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '规格参数的分组表，每个商品分类下有多个规格参数组' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'specification group table, each category  can have several specification parameter group' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tb_spec_group
@@ -3075,7 +3075,7 @@ CREATE TABLE `tb_spec_param`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `key_group`(`group_id`) USING BTREE,
   INDEX `key_category`(`cid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '规格参数组下的参数名' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'parameter name of each specification group' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tb_spec_param
@@ -3127,7 +3127,7 @@ CREATE TABLE `tb_spu`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT 'created time',
   `last_update_time` datetime(0) NULL DEFAULT NULL COMMENT '最后修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 195 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'spu表，该表描述的是一个抽象性的商品，比如 iphone8' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 195 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'spu table describes an abstract product group, like iphone 8' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tb_spu
@@ -3525,7 +3525,7 @@ CREATE TABLE `tb_stock`  (
   `seckill_total` int(9) NULL DEFAULT 0 COMMENT 'seckill quantity',
   `stock` int(9) NOT NULL COMMENT 'stock',
   PRIMARY KEY (`sku_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '库存表，代表库存，秒杀库存等信息' ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'stock table, include normal stock and seckill stock information' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tb_stock
@@ -4280,7 +4280,7 @@ CREATE TABLE `tb_user`  (
   `salt` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'salt ',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'user table' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tb_user
