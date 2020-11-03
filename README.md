@@ -16,6 +16,10 @@ El proyecto se practican con 12 microservicios:
 -
 ![microservicios:](https://github.com/Nereitay/C.C.Online/blob/master/image/microservicios.png)
 
+Host and Nginx configuration:
+-
+![nginx](https://github.com/Nereitay/C.C.Online/blob/master/image/hostNginx.png)
+
 Zuul gateway-service:
 - 
 ![zuul](https://github.com/Nereitay/C.C.Online/blob/master/image/zuul.png)
