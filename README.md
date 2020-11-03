@@ -16,7 +16,7 @@ El proyecto se practican con 12 microservicios:
 -
 ![microservicios:](https://github.com/Nereitay/C.C.Online/blob/master/image/microservicios.png)
 
-Host y Nginx configuration:
+Host y Nginx configuración:
 -
 ![nginx](https://github.com/Nereitay/C.C.Online/blob/master/image/hostNginx.png)
 
